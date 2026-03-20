@@ -66,28 +66,36 @@ int fibonacciSearch(Hewan* arr, int n, int target) {
     }
 
     int offset = -1;
-    cout << "\n--- Proses Iterasi Fibonacci Search ---\n";
+    
+    /* PENJELASAN PROSES ITERASI FIBONACCI SEARCH:
+    Proses iterasi berjalan selama nilai Fibonacci saat ini (fib) > 1.
+    Pada setiap iterasinya, algoritma melakukan:
+    1. Menentukan indeks 'i' yang dicek dari penjumlahan (offset + fib2).
+    2. Membandingkan ID target dengan ID pada array indeks ke-i:
+       - Jika cocok (==): Iterasi langsung berhenti, data ditemukan.
+       - Jika lebih kecil (<): Target ada di sebelah kiri. Rentang pencarian 
+         dipersempit ke kiri dengan menurunkan nilai Fibonacci 2 tingkat.
+       - Jika lebih besar (>): Target ada di sebelah kanan. Batas 'offset' 
+         digeser menjadi 'i', dan nilai Fibonacci diturunkan 1 tingkat.
+    */
     while (fib > 1) {
         int i = (offset + fib2 < n - 1) ? (offset + fib2) : (n - 1);
         
-        cout << "[Iterasi] Mengecek indeks ke-" << i << " dengan ID " << (arr + i)->id << "\n";
-
         if ((arr + i)->id == target) {
             return i;
         } else if ((arr + i)->id < target) {
             fib = fib1;
             fib1 = fib2;
             fib2 = fib - fib1;
-            offset = i;
         } else {
             fib = fib2;
             fib1 = fib1 - fib2;
             fib2 = fib - fib1;
+            offset = i;
         }
     }
 
     if (fib1 == 1 && (arr + offset + 1)->id == target) {
-        cout << "[Iterasi] Mengecek sisa indeks ke-" << offset + 1 << " dengan ID " << (arr + offset + 1)->id << "\n";
         return offset + 1;
     }
 
