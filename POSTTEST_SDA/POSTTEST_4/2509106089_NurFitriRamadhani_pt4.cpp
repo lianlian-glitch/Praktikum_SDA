@@ -125,7 +125,7 @@ void selectionSort(Hewan* arr, int n) {
 }
 
 void enqueue() {
-    Hewan* nodeBaru = new Hewan; // Alokasi memori dinamis
+    Hewan* nodeBaru = new Hewan;
     cout << "\n--- Mendaftar Antrian Pemeriksaan ---\n";
     cout << "Masukkan ID Pasien   : "; cin >> nodeBaru->id;
     cin.ignore();
